@@ -49,7 +49,8 @@ class CKEditorInstaller
     /**
      * @var string
      */
-    private static $archive = 'https://github.com/ckeditor/ckeditor-releases/archive/%s/%s.zip';
+//    private static $archive = 'https://github.com/ckeditor/ckeditor-releases/archive/%s/%s.zip';
+    private static $archive = 'https://codeload.github.com/ckeditor/ckeditor-releases/zip/%s/%s';
 
     /**
      * @var OptionsResolver
