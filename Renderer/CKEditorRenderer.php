@@ -15,6 +15,7 @@ use Ivory\JsonBuilder\JsonBuilder;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Templating\EngineInterface;
@@ -35,15 +36,18 @@ class CKEditorRenderer implements CKEditorRendererInterface
     private $jsonBuilder;
 
     /**
-     * CKEditorRenderer constructor.
-     *
-     * @param ContainerInterface $container
-     * @param JsonBuilder        $jsonBuilder
+     * @var RequestStack
      */
-    public function __construct(ContainerInterface $container, JsonBuilder $jsonBuilder)
+    private $requestStack;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container, JsonBuilder $jsonBuilder, RequestStack $requestStack)
     {
         $this->container = $container;
         $this->jsonBuilder = $jsonBuilder;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -321,6 +325,7 @@ class CKEditorRenderer implements CKEditorRendererInterface
     private function getLanguage()
     {
         if (($request = $this->getRequest()) !== null) {
+//            dd($request);
             return $request->getLocale();
         }
 
@@ -332,9 +337,9 @@ class CKEditorRenderer implements CKEditorRendererInterface
     /**
      * @return Request|null
      */
-    private function getRequest()
+    private function getRequest(): ?Request
     {
-        return $this->container->get('request_stack')->getMasterRequest();
+        return $this->requestStack->getMasterRequest();
     }
 
     /**
