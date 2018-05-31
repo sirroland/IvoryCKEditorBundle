@@ -1,7 +1,7 @@
 {
     "name": "sirroland/ckeditor-bundle",
     "type": "symfony-bundle",
-    "description": "Provides a CKEditor integration for your Symfony2 Project. Test",
+    "description": "Provides a CKEditor integration for your Symfony2 Project.",
     "keywords": [ "ckeditor" ],
     "license": "MIT",
     "authors": [
