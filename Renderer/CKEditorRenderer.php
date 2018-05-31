@@ -30,11 +30,20 @@ class CKEditorRenderer implements CKEditorRendererInterface
     private $container;
 
     /**
-     * @param ContainerInterface $container
+     * @var JsonBuilder
      */
-    public function __construct(ContainerInterface $container)
+    private $jsonBuilder;
+
+    /**
+     * CKEditorRenderer constructor.
+     *
+     * @param ContainerInterface $container
+     * @param JsonBuilder        $jsonBuilder
+     */
+    public function __construct(ContainerInterface $container, JsonBuilder $jsonBuilder)
     {
         $this->container = $container;
+        $this->jsonBuilder = $jsonBuilder;
     }
 
     /**
@@ -303,7 +312,7 @@ class CKEditorRenderer implements CKEditorRendererInterface
      */
     private function getJsonBuilder()
     {
-        return $this->container->get('ivory_ck_editor.renderer.json_builder');
+        return $this->jsonBuilder;
     }
 
     /**
